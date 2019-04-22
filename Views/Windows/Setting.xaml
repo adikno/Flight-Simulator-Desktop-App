@@ -1,0 +1,32 @@
+﻿<Window x:Class="FlightSimulator.Views.Windows.Setting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlightSimulator.Views.Windows"
+        mc:Ignorable="d"
+        Title="Setting" Height="300" Width="300">
+    <Grid TextBlock.FontSize="14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Padding="3" Margin="3">Flight Server IP:</TextBlock>
+        <TextBox x:Name="txtMazeName" Text="{Binding FlightServerIP }" Grid.Column="2" Padding="3" Margin="3"></TextBox>
+        <TextBlock Grid.Row="1" Padding="3" Margin="3">Flight Info Port:</TextBlock>
+        <TextBox x:Name="txtRows" Text="{Binding FlightInfoPort}" Grid.Row="1" Grid.Column="2" Padding="3"
+Margin="3"></TextBox>
+        <TextBlock Grid.Row="2" Padding="3" Margin="3">Flight Command Port:</TextBlock>
+        <TextBox x:Name="txtCols" Text="{Binding FlightCommandPort}" Grid.Row="2" Grid.Column="2" Padding="3"
+Margin="3"></TextBox>
+        <Button x:Name="Cancel" Grid.Row="3" HorizontalAlignment="Center" Margin="142,10,82.333,0" Padding="5" Width="69" Command="{Binding CancelCommand}" Grid.ColumnSpan="2">Cancel</Button>
+        <Button x:Name="Ok" Grid.Row="3" HorizontalAlignment="Center" Margin="56,10,21.667,0" Padding="5" Width="69" Command="{Binding ClickCommand}">OK</Button>
+    </Grid>
+
+</Window>
