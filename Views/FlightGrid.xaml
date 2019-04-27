@@ -18,8 +18,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Loaded="FlightBoard_Loaded_1">
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Loaded="FlightBoard_Loaded">
             <Grid.Resources>
                 <Style TargetType="TextBlock" x:Key="LabelStyle">
                     <Setter Property="FontSize" Value="20" />
@@ -43,8 +43,8 @@
             </d3:ChartPlotter>
             <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource LabelStyle}" HorizontalAlignment="Center">Lat</TextBlock>
         </Grid>
-        <Button Background="AliceBlue" Width="54" Height="20" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" Command ="{Binding ConnectCommand}" Content="Conncet"/>
-        <Button HorizontalAlignment="Left" Background="AliceBlue"  Command="{Binding SettingCommand}" Width="54" Height="20" Grid.Column="1" Margin="5" VerticalAlignment="Top" Content="Setting"/>
+        <Button Background="AliceBlue" Width="86" Height="20" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Command ="{Binding ConnectCommand}" Content="{Binding ButtonText}"/>
+        <Button HorizontalAlignment="Left" Background="AliceBlue"  Command="{Binding SettingCommand}" Width="86" Height="20" Grid.Column="1" Margin="5" VerticalAlignment="Top" Content="Setting"/>
 
 
     </Grid>
