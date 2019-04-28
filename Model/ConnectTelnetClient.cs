@@ -9,7 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
-{
+{   /*
+     * This class responsible of communication with the server, by injecting the prefferd telnet client.
+     */
     class ConnectTelnetClient : ITelnetClient
 
 
@@ -19,6 +21,9 @@ namespace FlightSimulator.Model
         /// </summary>
         private static NetworkStream stream;
 
+        private bool connected = false;
+
+
         /// <summary>
         /// The writer
         /// </summary>
@@ -26,14 +31,18 @@ namespace FlightSimulator.Model
 
         TcpClient client;
         IPEndPoint ep;
+        /**this function connct to tehlnet client
+         */
         public void connect(string ip, int port)
         {
-        
+
             ep = new IPEndPoint(IPAddress.Parse(ip), port);
             client = new TcpClient();
-            client.Connect(ep);            Globals.connected = true;
+            client.Connect(ep);
+            connected = true;
         }
-
+        /**this function disconnect the clinet
+         */
         public void disconnect()
         {
             client.Close();
@@ -44,20 +53,22 @@ namespace FlightSimulator.Model
 
             throw new NotImplementedException();
         }
-
+        /**this function whrite commands to the simulator.
+         */
         public void write(string command)
         {
-
-            command = command + "\r\n";
-            if (client == null)
+            if (connected)
             {
-                Console.WriteLine("Client not connected - can't write");
-                return;
+                command = command + "\r\n";
+                if (client == null)
+                {
+                    Console.WriteLine("Client not connected - can't write");
+                    return;
+                }
+                NetworkStream nwStream = client.GetStream();
+                byte[] byteToSend = ASCIIEncoding.ASCII.GetBytes(command);
+                nwStream.Write(byteToSend, 0, byteToSend.Length);
             }
-            NetworkStream nwStream = client.GetStream();
-            byte[] byteToSend = ASCIIEncoding.ASCII.GetBytes(command);
-            nwStream.Write(byteToSend, 0, byteToSend.Length);
-
         }
     }
 }

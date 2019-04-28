@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
-{
+{   /*this class is the server model*/
     public class InfoServer : INotifyPropertyChanged
     {
 
@@ -67,13 +67,14 @@ namespace FlightSimulator.Model
                 this.PropertyChanged(this,new PropertyChangedEventArgs(v));
             }
         }
-
+        /*this function connect to the server and read data from the simulator in new thead*/
         public void Start(int port)
         {
             IPEndPoint ep = new
             IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
             listener = new TcpListener(ep);
             listener.Start();
+            //connecting
             client = listener.AcceptTcpClient();
             IsConnected = true;
             int i = 0;
@@ -81,7 +82,7 @@ namespace FlightSimulator.Model
                 while (IsConnected)
                 {
                     i++;
-       
+                    //read data from the sever
                     reader = new BinaryReader(client.GetStream());
                 
 
@@ -95,7 +96,9 @@ namespace FlightSimulator.Model
             }
             }).Start();
         }
-
+        /**this function is excute the data from the server and 
+         * changing the values of the lon ad the lat Respectively
+         **/
         private void ExecuteCommand(string commandLine)
         {
            
@@ -109,7 +112,7 @@ namespace FlightSimulator.Model
                 latModel = Double.Parse(args[1], format);
                 isFirstTime = false;
             }
-           
+            // Paint the plain route if the the lon/lat change is greater than some epsilon.
             else if ((Convert.ToDouble(args[0]) < Convert.ToDouble(LonModel) - EPSILON || Convert.ToDouble(args[0]) > Convert.ToDouble(LonModel) + EPSILON) &&
                            (Convert.ToDouble(args[1]) < Convert.ToDouble(LatModel) - EPSILON || Convert.ToDouble(args[1]) > Convert.ToDouble(LatModel) + EPSILON))
             {
@@ -119,6 +122,9 @@ namespace FlightSimulator.Model
             Thread.Sleep(100);
 
         }
+        /**
+         * this function stop the connection
+         */
         public void Stop()
         {
             IsConnected = false;
